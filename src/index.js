@@ -23,14 +23,14 @@ class Board extends React.Component {
     }
 
     handleClick(i) {
-        const newSquares = this.state.squares.slice();  // slice to create shallow copy
-        if (calculateWinner(squares) || squares[i]) {
+        const squaresCopy = this.state.squares.slice();  // slice to create shallow copy
+        if (calculateWinner(squaresCopy) || squaresCopy[i]) {
             return;
         }
-        newSquares[i] = this.state.xIsNext ? 'X' : 'O';
+        squaresCopy[i] = this.state.xIsNext ? 'X' : 'O';
         this.setState({
-            squares: newSquares,
-            xIsNext = !this.state.xIsNext,
+            squares: squaresCopy,
+            xIsNext: !this.state.xIsNext,
         });
     }
 
@@ -111,7 +111,7 @@ function calculateWinner(squares) {
         [2, 4, 6],
     ];
     for (let i = 0; i < lines.length; i++) {
-        const[a, b, c = lines[i];
+        const[a, b, c] = lines[i];
         if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
             return squares[a];
         }
